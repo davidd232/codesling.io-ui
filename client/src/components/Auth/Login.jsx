@@ -13,10 +13,9 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      username: ''
+      username: '',
     }
   }
-
   submitAuthData = async (e) => {
     e.preventDefault();
     const { email, password, username } = this.state;
@@ -27,7 +26,7 @@ export default class Login extends Component {
     }
     try {
       const data = await axios.post(`http://localhost:3396/api/auth/login`, body);
-      console.log('datadata', data.data)
+      console.log(this.state);
       localStorage.setItem('email', data.data.email)
       localStorage.setItem('id', data.data.id)
       localStorage.setItem('token', data.data.token.accessToken)
