@@ -33,7 +33,8 @@ class Home extends Component {
   async componentDidMount() {
     console.log('state in home', this.props);
     const id = localStorage.getItem('id');
-    const { data } = await axios.get(`http://localhost:3396/api/usersChallenges/${id}`)
+    // const { data } = await axios.get(`http://localhost:3396/api/usersChallenges/${id}`)
+    const { data } = await axios.get('http://localhost:3396/api/challenges/getAllChallenges');
     this.setState({
       allChallenges: data.rows,
     });
@@ -106,6 +107,8 @@ class Home extends Component {
           name="room"
           onChange={this.handleChange}
         />
+        <br />
+        <br />
         <Button
           backgroundColor="red"
           color="white"

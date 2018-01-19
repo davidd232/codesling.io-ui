@@ -98,12 +98,7 @@ class Sling extends Component {
       data: { 
         roomname: this.state.roomname 
       }})
-      // .then((res) => {
-      //   console.log(res);
-      // })
-      // .catch(() => {
-      //   console.error('error deleting');
-      // })
+      // this.props.history.push('/home');
   }
   submitCode = () => {
     const { socket } = this.props;
