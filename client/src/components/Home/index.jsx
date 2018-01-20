@@ -31,7 +31,6 @@ class Home extends Component {
     this.setState({ socket: this.socket });
   }
   async componentDidMount() {
-    console.log('state in home', this.props);
     const id = localStorage.getItem('id');
     // const { data } = await axios.get(`http://localhost:3396/api/usersChallenges/${id}`)
     const { data } = await axios.get('http://localhost:3396/api/challenges/getAllChallenges');
@@ -39,6 +38,7 @@ class Home extends Component {
       allChallenges: data.rows,
     });
     this.state.socket.on('server.login', (res) => {
+      console.log(res);
       this.setState({
         sharedURL: res.duelURL
       })
@@ -72,7 +72,6 @@ class Home extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    console.log(this.state);
   }
   showUserURL = () => {
     const payload = {
@@ -83,12 +82,17 @@ class Home extends Component {
   }
 
   render() {
+    let join;
+    if (this.state.sharedURL !== null) {
+      join = <a className='join' href={this.state.sharedURL}>Join Duel:  {this.state.sharedURL}</a>
+    }
     return (
       <div className="landing-page-container">
         <Logo
           className="landing-page-logo"
         />
         <br />
+        <h5>Challenges</h5>
         <select onChange={(e) => this.handleChallengeSelect(e)}>
           {this.state.allChallenges.map((challenge, i) => {
             return (
@@ -105,6 +109,7 @@ class Home extends Component {
         <br />
         <Input
           name="room"
+          id="urlInput"
           onChange={this.handleChange}
         />
         <br />
@@ -112,7 +117,7 @@ class Home extends Component {
         <Button
           backgroundColor="red"
           color="white"
-          text="Show Logged In Users"
+          text="Share URL with Users in Room"
           onClick={() => this.showUserURL()}
         />
         <br />
@@ -126,10 +131,11 @@ class Home extends Component {
         <Button
           backgroundColor="red"
           color="white"
-          text="Duel"
+          text="Play Solo/Get Duel URL to Share"
           onClick={() => this.handleDuelClick()}
         />
-        <a href={this.state.sharedURL}>Join Duel!</a>
+        <br />
+        {join}
       </div>
     );
   }

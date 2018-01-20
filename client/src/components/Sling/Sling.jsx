@@ -194,13 +194,13 @@ class Sling extends Component {
             color="white"
             onClick={() => this.submitCode()}
           />
-          <Button
+          <Link to='/home'><Button
             className="run-btn"
             text="Go Home"
             backgroundColor="red"
             color="white"
             onClick={() => this.goHome()}
-          />
+          /></Link>
           <div className="messages">
             <ul>
             {this.state.messages.map((message, i) => (

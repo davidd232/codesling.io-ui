@@ -61,6 +61,10 @@
 .liMessage {
   list-style-type: none;
 }
+.join {
+  font-size: large;
+  text-decoration: none;
+}
 
 #remotesVideos {
   width: 100%;
